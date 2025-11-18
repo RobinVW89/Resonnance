@@ -237,6 +237,17 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
     letter-spacing: 0.1em;
 }
 
+.logo-image {
+    height: 50px;
+    width: auto;
+    display: block;
+    transition: transform var(--transition-normal);
+}
+
+.logo-image:hover {
+    transform: scale(1.05);
+}
+
 .logo-text {
     background: linear-gradient(135deg, var(--color-white), var(--color-gold));
     -webkit-background-clip: text;
