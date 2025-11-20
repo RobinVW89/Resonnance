@@ -130,57 +130,37 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            // Construire le corps de l'email
-            const nom = formData.get('nom') || '';
-            const prenom = formData.get('prenom') || '';
-            const email = formData.get('email') || '';
-            const telephone = formData.get('telephone') || '';
-            const entreprise = formData.get('entreprise') || '';
-            const fonction = formData.get('fonction') || '';
-            const secteur = formData.get('secteur') || '';
-            const linkedin = formData.get('linkedin') || '';
-            const motivation = formData.get('motivation') || '';
-            
-            const emailBody = `Nouvelle candidature Résonnance
-            
-Nom: ${nom}
-Prénom: ${prenom}
-Email: ${email}
-Téléphone: ${telephone}
-Entreprise: ${entreprise}
-Fonction: ${fonction}
-Secteur: ${secteur}
-LinkedIn: ${linkedin}
-
-Motivation:
-${motivation}`;
-            
-            // Rediriger vers mailto avec les informations
-            const mailtoLink = `mailto:r.soyer@jeannin-automobiles.com?subject=${encodeURIComponent('Candidature Résonnance - ' + prenom + ' ' + nom)}&body=${encodeURIComponent(emailBody)}`;
-            window.location.href = mailtoLink;
-            
-            // Show success message
-            adhesionForm.style.display = 'none';
-            formSuccess.style.display = 'block';
-            
-            // Scroll to success message
-            formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            
-            // In a real application, this would send data to a server
-            console.log('Form submitted:', Object.fromEntries(formData));
-            
-            // Optional: Send to a backend API
-            // fetch('/api/candidature', {
-            //     method: 'POST',
-            //     body: formData
-            // })
-            // .then(response => response.json())
-            // .then(data => {
-            //     console.log('Success:', data);
-            // })
-            // .catch((error) => {
-            //     console.error('Error:', error);
-            // });
+            // Envoyer à Formspree
+            fetch('https://formspree.io/f/xanvkjan', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Show success message
+                    adhesionForm.style.display = 'none';
+                    formSuccess.style.display = 'block';
+                    
+                    // Scroll to success message
+                    formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    // Reset form
+                    adhesionForm.reset();
+                } else {
+                    response.json().then(data => {
+                        if (data.errors) {
+                            alert('Erreur lors de l\'envoi du formulaire. Veuillez réessayer.');
+                        }
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Erreur lors de l\'envoi du formulaire. Veuillez réessayer.');
+            });
         });
         
         // Reset border color on input
