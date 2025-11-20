@@ -343,18 +343,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const bio = member.bio || '';
         const phoneParts = bio.match(/Tél:\s*([^•]+)/);
         const emailParts = bio.match(/Email:\s*([^•]+)/);
-        const addressParts = bio.split('•').slice(-1)[0].trim();
         
         const phone = phoneParts ? phoneParts[1].trim() : '';
         const email = emailParts ? emailParts[1].trim() : '';
         
-        // Extract only postal code and city from address (e.g., "89000 Auxerre")
+        // Extract only postal code and city from bio (e.g., "89000 Auxerre")
         let cityInfo = '';
-        if (addressParts && !addressParts.includes('Tél') && !addressParts.includes('Email')) {
-            const postalMatch = addressParts.match(/(\d{5})\s+([A-Z][A-Za-zÀ-ÿ\-\s]+)/i);
-            if (postalMatch) {
-                cityInfo = `${postalMatch[1]} ${postalMatch[2].trim()}`;
-            }
+        const postalMatch = bio.match(/(\d{5})\s+([A-ZÉÈÊËÀÂÄÔÖÙÛÜÏÎÇ][A-Za-zÀ-ÿ\-\s]+)/);
+        if (postalMatch) {
+            cityInfo = `${postalMatch[1]} ${postalMatch[2].trim().split(/[\n,]/)[0].trim()}`;
         }
 
         // Build links section
