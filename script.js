@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // Envoyer à Formspree
-            fetch('https://formspree.io/f/mwpyzqgo', {
+            fetch('https://formspree.io/f/xeondrya', {
                 method: 'POST',
                 body: formData,
                 headers: {
