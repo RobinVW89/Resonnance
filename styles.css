@@ -260,6 +260,7 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
     letter-spacing: 0.1em;
     display: flex;
     align-items: center;
+    margin-right: 2.5rem;
 }
 
 .logo-image {
