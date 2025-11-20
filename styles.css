@@ -261,7 +261,7 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
 }
 
 .logo-image {
-    height: 50px;
+    height: 75px;
     width: auto;
     display: block;
     transition: transform var(--transition-normal);
