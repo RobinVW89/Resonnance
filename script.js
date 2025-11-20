@@ -341,10 +341,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Parse bio to extract phone, email, address
         const bio = member.bio || '';
-        const phoneParts = bio.match(/Tél:\s*([^•]+)/);
+        const phoneParts = bio.match(/Tél:\s*([\d\s]+)/);
         const emailParts = bio.match(/Email:\s*([^•]+)/);
         
-        const phone = phoneParts ? phoneParts[1].trim() : '';
+        let phone = phoneParts ? phoneParts[1].trim() : '';
+        // Format phone if it's 10 digits without spaces (e.g., 0677724544 -> 06 77 72 45 44)
+        if (phone && phone.replace(/\s/g, '').length === 10 && !/\s/.test(phone)) {
+            phone = phone.match(/.{1,2}/g).join(' ');
+        }
         const email = emailParts ? emailParts[1].trim() : '';
         
         // Extract only postal code and city from bio (e.g., "89000 Auxerre")
