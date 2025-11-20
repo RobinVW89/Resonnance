@@ -15,12 +15,12 @@ async function checkApi(){
 
 // --- API auth helpers ---
 function getAuthHeader(){
-  // Prefer token if present
-  const storedToken = localStorage.getItem('apiToken') || (document.getElementById('apiToken') && document.getElementById('apiToken').value) || '';
-  if(storedToken) return 'Bearer ' + storedToken;
-  const storedUser = localStorage.getItem('apiUser') || (document.getElementById('apiUser') && document.getElementById('apiUser').value) || '';
-  const storedPass = localStorage.getItem('apiPass') || (document.getElementById('apiPass') && document.getElementById('apiPass').value) || '';
-  if(storedUser && storedPass) return 'Basic ' + btoa(storedUser + ':' + storedPass);
+  // Read credentials only from input fields (do not persist in localStorage)
+  const tokenInput = (document.getElementById('apiToken') && document.getElementById('apiToken').value) || '';
+  if(tokenInput) return 'Bearer ' + tokenInput;
+  const userInput = (document.getElementById('apiUser') && document.getElementById('apiUser').value) || '';
+  const passInput = (document.getElementById('apiPass') && document.getElementById('apiPass').value) || '';
+  if(userInput && passInput) return 'Basic ' + btoa(userInput + ':' + passInput);
   return null;
 }
 
@@ -129,6 +129,36 @@ function escapeHtml(s){ return String(s).replaceAll('&','&amp;').replaceAll('<',
 
 function message(msg, isError=false){ adminMessage.textContent = msg; adminMessage.className = isError? 'danger' : 'notice'; }
 
+// Show detailed server response in the adminMessage area
+async function parseResponseBody(res){
+  if(!res) return null;
+  const ct = res.headers && res.headers.get ? res.headers.get('content-type') || '' : '';
+  try{
+    if(ct.includes('application/json')) return await res.json();
+    return await res.text();
+  }catch(e){
+    try{ return await res.text(); }catch(e2){ return null; }
+  }
+}
+
+function showServerResponse(res, body){
+  const now = new Date().toLocaleTimeString();
+  if(!res){ adminMessage.textContent = `[${now}] Erreur réseau ou serveur injoignable.`; adminMessage.className = 'danger'; return; }
+  const status = `${res.status} ${res.statusText || ''}`.trim();
+  let textBody = '';
+  if(body != null){
+    if(typeof body === 'string') textBody = body;
+    else {
+      try{ textBody = JSON.stringify(body); }catch(e){ textBody = String(body); }
+    }
+  }
+  const short = textBody && textBody.length>300 ? textBody.slice(0,300)+"..." : textBody;
+  adminMessage.textContent = `[${now}] Serveur: ${status} ${ short ? '— ' + short : '' }`;
+  adminMessage.className = res.ok ? 'notice' : 'danger';
+}
+
+function showNetworkError(err){ const now=new Date().toLocaleTimeString(); adminMessage.textContent=`[${now}] Erreur réseau: ${err && err.message?err.message:err}`; adminMessage.className='danger'; }
+
 function resetForm(){ memberForm.reset(); inputs.memberId.value=''; }
 
 function bindTableActions(){
@@ -159,15 +189,18 @@ function loadMemberToForm(id){
   inputs.bio.value = m.bio || '';
 }
 
-function deleteMember(id){
-  if(!confirm('Supprimer ce membre ?')) return;
+async function deleteMember(id){
+  // non-blocking confirmation modal
+  const ok = await showConfirm('Supprimer ce membre ?');
+  if(!ok) return;
   if(apiMode){
-    apiFetch(`/api/members/${id}`, { method: 'DELETE' })
-      .then(async r => {
-        if(!r.ok){ const txt = await r.text().catch(()=>null); message('Erreur suppression serveur: ' + (txt || r.statusText), true); return; }
-        members = members.filter(m => String(m.id)!==String(id)); applyFilter(); message('Membre supprimé sur le serveur.');
-      })
-      .catch(err=>{ console.error(err); message('Erreur suppression serveur (network). Suppression locale effectuée.', true); members = members.filter(m => String(m.id)!==String(id)); applyFilter(); });
+    try{
+      const r = await apiFetch(`/api/members/${id}`, { method: 'DELETE' });
+      const body = await parseResponseBody(r);
+      showServerResponse(r, body);
+      if(!r.ok) return;
+      members = members.filter(m => String(m.id)!==String(id)); applyFilter();
+    }catch(err){ console.error(err); showNetworkError(err); members = members.filter(m => String(m.id)!==String(id)); applyFilter(); }
   } else {
     members = members.filter(m => String(m.id)!==String(id));
     applyFilter();
@@ -185,7 +218,7 @@ function applyFilter(){
   bindTableActions();
 }
 
-function upsertMemberFromForm(){
+async function upsertMemberFromForm(){
   const idVal = inputs.memberId.value;
   let id = idVal ? Number(idVal) : (members.reduce((max,m)=>Math.max(max,m.id||0),0)+1);
   const obj = {
@@ -205,15 +238,19 @@ function upsertMemberFromForm(){
   if(apiMode){
     // use API
     if(idx>=0){
-      apiFetch(`/api/members/${id}`, { method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify(obj) })
-        .then(r=>r.json()).then(updated=>{
-          members[idx]=updated; message('Membre mis à jour sur serveur.'); resetForm(); applyFilter();
-        }).catch(err=>{ console.error(err); message('Erreur serveur, opération locale effectuée', true); members[idx]=obj; resetForm(); applyFilter(); });
+      try{
+        const r = await apiFetch(`/api/members/${id}`, { method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify(obj) });
+        const body = await parseResponseBody(r);
+        showServerResponse(r, body);
+        if(r.ok){ members[idx]= (typeof body === 'object' && body !== null) ? body : obj; resetForm(); applyFilter(); }
+      }catch(err){ console.error(err); showNetworkError(err); members[idx]=obj; resetForm(); applyFilter(); }
     } else {
-      apiFetch('/api/members', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(obj) })
-        .then(r=>r.json()).then(created=>{
-          members.push(created); message('Membre ajouté sur serveur.'); resetForm(); applyFilter();
-        }).catch(err=>{ console.error(err); message('Erreur serveur, opération locale effectuée', true); members.push(obj); resetForm(); applyFilter(); });
+      try{
+        const r = await apiFetch('/api/members', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(obj) });
+        const body = await parseResponseBody(r);
+        showServerResponse(r, body);
+        if(r.ok){ members.push( (typeof body === 'object' && body !== null) ? body : obj ); resetForm(); applyFilter(); }
+      }catch(err){ console.error(err); showNetworkError(err); members.push(obj); resetForm(); applyFilter(); }
     }
   } else {
     if(idx>=0){ members[idx]=obj; message('Membre mis à jour.'); }
@@ -227,25 +264,27 @@ async function saveToServer(){
   if(!apiMode){ message('API non disponible. Démarrez le serveur API (npm start).', true); return; }
   try{
     const res = await apiFetch('/api/members/save', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(members) });
-    if(!res.ok){ const txt = await res.text().catch(()=>null); message('Erreur sauvegarde serveur: ' + (txt || res.statusText), true); return; }
-    const json = await res.json();
-    if(json && json.success) message('Liste sauvegardée sur serveur.'); else message('Erreur sauvegarde serveur: ' + (json && json.error ? json.error : 'unknown'), true);
+    const body = await parseResponseBody(res);
+    showServerResponse(res, body);
+    if(!res.ok) return;
+    if(body && body.success) message('Liste sauvegardée sur serveur.');
   }catch(e){ console.error(e); message('Erreur sauvegarde serveur.', true); }
 }
 
 // Trigger enrich-batch on server
 async function enrichOnServer(){
   if(!apiMode){ message('API non disponible. Démarrez le serveur API (npm start).', true); return; }
-  if(!confirm('Cette action va tenter de récupérer métadonnées LinkedIn pour les membres disposant d\'un lien LinkedIn. Continuer ?')) return;
+  const okEnrich = await showConfirm("Cette action va tenter de récupérer métadonnées LinkedIn pour les membres disposant d'un lien LinkedIn. Continuer ?");
+  if(!okEnrich) return;
   try{
     const res = await apiFetch('/api/enrich-batch', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({}) });
-    const json = await res.json();
-    if(json){
-      message('Enrichissement terminé (voir console pour détails).');
-      // refresh members from server
-      members = await apiFetch('/api/members').then(r=>r.json());
-      applyFilter();
-    }
+    const body = await parseResponseBody(res);
+    showServerResponse(res, body);
+    if(!res.ok) return;
+    message('Enrichissement terminé (voir console pour détails).');
+    // refresh members from server
+    try{ const r2 = await apiFetch('/api/members'); const b2 = await parseResponseBody(r2); if(r2.ok && Array.isArray(b2)){ members = b2; applyFilter(); } }
+    catch(e){ console.error(e); }
   }catch(e){ console.error(e); message('Erreur lors de l\'enrichissement.', true); }
 }
 
@@ -314,12 +353,11 @@ document.addEventListener('DOMContentLoaded', async ()=>{
   if(apiMode) message('Mode API détecté — les opérations modifient directement le serveur.');
 
   // populate API credentials fields from localStorage
-  const savedUser = localStorage.getItem('apiUser') || '';
-  const savedPass = localStorage.getItem('apiPass') || '';
+  // Do not auto-populate credentials from localStorage for security
   const userEl = document.getElementById('apiUser');
   const passEl = document.getElementById('apiPass');
-  if(userEl) userEl.value = savedUser;
-  if(passEl) passEl.value = savedPass;
+  if(userEl) userEl.value = '';
+  if(passEl) passEl.value = '';
 
   const saveCredsBtn = document.getElementById('saveApiCredsBtn');
   if(saveCredsBtn){
@@ -327,9 +365,8 @@ document.addEventListener('DOMContentLoaded', async ()=>{
       const u = (document.getElementById('apiUser')||{}).value || '';
       const p = (document.getElementById('apiPass')||{}).value || '';
       if(!u || !p){ message('Entrez user et mot de passe API avant d’enregistrer.', true); return; }
-      localStorage.setItem('apiUser', u);
-      localStorage.setItem('apiPass', p);
-      message('Credentials API enregistrés localement. Réessayez l’opération API.');
+      // Do not persist credentials; keep in inputs for this session only
+      message('Credentials API pris en compte pour cette session. Réessayez l’opération API.');
       // re-check API with new creds
       checkApi().then(ok=>{ if(ok) message('Mode API détecté — authentifié.'); else message('Impossible d’atteindre l’API avec ces credentials.', true); });
     });
@@ -341,17 +378,44 @@ document.addEventListener('DOMContentLoaded', async ()=>{
   if(genBtn){
     genBtn.addEventListener('click', ()=>{
       const u = (document.getElementById('apiUser')||{}).value || localStorage.getItem('apiUser') || '';
-      const p = (document.getElementById('apiPass')||{}).value || localStorage.getItem('apiPass') || '';
+      const p = (document.getElementById('apiPass')||{}).value || '';
       if(!u || !p){ message('Entrez user et mot de passe pour générer le token.', true); return; }
       const tok = btoa(u + ':' + p);
-      localStorage.setItem('apiToken', tok);
       if(tokenEl) tokenEl.value = tok;
-      message('Token généré et stocké localement. Il sera utilisé pour les requêtes API (Bearer/x-api-key).');
+      message('Token généré pour cette session. Il sera utilisé pour les requêtes API (Bearer/x-api-key).');
       // re-check
       checkApi().then(ok=>{ if(ok) message('Mode API détecté — authentifié via token.'); else message('Impossible d’atteindre l’API avec ce token.', true); });
     });
   }
   // populate token field from storage
-  if(tokenEl) tokenEl.value = localStorage.getItem('apiToken') || '';
+  if(tokenEl) tokenEl.value = '';
 
 });
+
+// Modal confirm helper
+function showConfirm(message){
+  return new Promise((resolve)=>{
+    const modal = document.getElementById('confirmModal');
+    const msg = document.getElementById('confirmModalMessage');
+    const yes = document.getElementById('confirmYes');
+    const no = document.getElementById('confirmNo');
+    if(!modal || !yes || !no || !msg){ resolve(window.confirm(message)); return; }
+    msg.textContent = message;
+    modal.style.display = 'flex';
+    // handlers
+    function clean(){
+      modal.style.display = 'none';
+      yes.removeEventListener('click', onYes);
+      no.removeEventListener('click', onNo);
+      window.removeEventListener('keydown', onKey);
+    }
+    function onYes(){ clean(); resolve(true); }
+    function onNo(){ clean(); resolve(false); }
+    function onKey(e){ if(e.key==='Escape'){ clean(); resolve(false); } }
+    yes.addEventListener('click', onYes);
+    no.addEventListener('click', onNo);
+    window.addEventListener('keydown', onKey);
+    // focus yes for keyboard
+    yes.focus();
+  });
+}

@@ -16,6 +16,12 @@
     .small-btn{padding:.35rem .6rem;font-size:.9rem}
     .notice{padding:.6rem;border-radius:6px;background:#f6f9f6;border:1px solid #e8f3ea;color:#2b6b3a}
     .danger{background:#fff4f4;border:1px solid #f2dede;color:#8a1f1f}
+    /* confirm modal */
+    #confirmModal{display:none;position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(0,0,0,0.35);align-items:center;justify-content:center;z-index:2000}
+    #confirmModal .box{background:#fff;padding:1rem 1.25rem;border-radius:6px;max-width:520px;width:90%;box-shadow:0 6px 24px rgba(0,0,0,0.2);}
+    #confirmModal .box p{margin:0 0 .75rem}
+    #confirmModal .actions{display:flex;gap:.5rem;justify-content:flex-end}
+    #confirmModal .actions .btn{padding:.4rem .7rem}
   </style>
 </head>
 <body>
@@ -55,6 +61,16 @@
         <button id="resetForm" type="button" class="btn small-btn">Réinitialiser</button>
       </form>
     </section>
+    <!-- Confirmation modal (non-blocking) -->
+    <div id="confirmModal" role="dialog" aria-modal="true">
+      <div class="box">
+        <p id="confirmModalMessage">Confirmer ?</p>
+        <div class="actions">
+          <button id="confirmNo" class="btn small-btn">Annuler</button>
+          <button id="confirmYes" class="btn btn-primary small-btn">Oui</button>
+        </div>
+      </div>
+    </div>
 
     <section aria-labelledby="listTitle">
       <h2 id="listTitle" style="margin-top:1.25rem">Liste des membres</h2>
@@ -78,6 +94,17 @@
 
   </div>
 
+  <script>
+    // Ensure any stored API credentials are removed on load to avoid leaking tokens
+    try{
+      if(window.localStorage){
+        localStorage.removeItem('apiToken');
+        localStorage.removeItem('apiUser');
+        localStorage.removeItem('apiPass');
+        console.info('Cleared stored API credentials from localStorage');
+      }
+    }catch(e){ /* ignore */ }
+  </script>
   <script src="admin.js"></script>
 </body>
 </html>

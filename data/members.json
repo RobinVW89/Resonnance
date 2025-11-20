@@ -1,5 +1,143 @@
 [
   {
+    "id": 7,
+    "name": "Julie Travaillée",
+    "company": "Simon Energies plomberie chauffage",
+    "category": "Consulting",
+    "role": "Consultante",
+    "photo": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&h=400&fit=crop",
+    "bio": "Consultante indépendante — voir le profil LinkedIn pour le détail du parcours. Tél: 06 30 31 50 35 • Adresse: 1 ALLEE DES TILLEULS, 89290 CHAMPS-SUR-YONNE.",
+    "linkedin": "https://www.linkedin.com/in/julie-travaillée-b39503118/"
+  },
+  {
+    "id": 8,
+    "name": "Adrien Bailly",
+    "company": "HOME 89 AUXERRE",
+    "category": "Conciergerie",
+    "role": "LinkedIn",
+    "photo": "https://media.licdn.com/dms/image/v2/D4E03AQEaTeiwdvMkIg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1715159277388?e=2147483647&v=beta&t=-Zf94owuC4_4VuflPLREYgJ7QrXklGSwqBIY8JOJNR8",
+    "bio": "Tél: 06 78 87 67 60 • Email: Homepart89@gmail.com • 8 quai de la Marine, 89000 Auxerre.",
+    "linkedin": "https://www.linkedin.com/in/adrien-bailly-9521a210b/",
+    "_og": {
+      "fetched_at": "2025-11-20T18:48:33.015Z",
+      "title": "Adrien BAILLY - Bail Partner | LinkedIn",
+      "description": "Rejoins nous · Expérience : Bail Partner · Formation : CFA de l'Yonne Henri Neyer Auxerre · Lieu : Auxerre · 500 relations ou plus sur LinkedIn. Consultez le profil de Adrien BAILLY sur LinkedIn, une communauté professionnelle d’un milliard de membres.",
+      "image": "https://media.licdn.com/dms/image/v2/D4E03AQEaTeiwdvMkIg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1715159277388?e=2147483647&v=beta&t=-Zf94owuC4_4VuflPLREYgJ7QrXklGSwqBIY8JOJNR8"
+    }
+  },
+  {
+    "id": 9,
+    "name": "Guillaume Leclercq",
+    "company": "LG Courtage & J3G Patrimoine",
+    "category": "Conseil en gestion de patrimoine",
+    "role": "",
+    "photo": "",
+    "bio": "Tél: 06 81 22 24 66 • Email: guillaume.leclercq@j3g-patrimoine.com • 13 RUE DE L’HORLOGE 89000 AUXERRE.",
+    "linkedin": "https://www.linkedin.com/in/guillaume-leclercq-574063b2/"
+  },
+  {
+    "id": 10,
+    "name": "Jean-Philippe Ferreira",
+    "company": "Banque Pop",
+    "category": "Banque",
+    "role": "Directeur",
+    "photo": "",
+    "bio": "Tél: 06 31 09 45 23.",
+    "linkedin": "https://www.linkedin.com/in/jean-philippe-ferreira-de-lima-a380ba138/"
+  },
+  {
+    "id": 11,
+    "name": "Julie Hrabar",
+    "company": "Banque Pop",
+    "category": "Banque",
+    "role": "",
+    "photo": "",
+    "bio": "Tél: 06 64 52 69 50 • Email: julie.hrabar@bpbfc.fr.",
+    "linkedin": "https://www.linkedin.com/in/julie-hrabar-martiré-b97748164/"
+  },
+  {
+    "id": 12,
+    "name": "Maxime Dissoubray",
+    "company": "MD Cuisine",
+    "category": "Cuisiniste",
+    "role": "",
+    "photo": "",
+    "bio": "Tél: 06 37 06 57 38 • 14 rue des Lilas, 89290 Augy.",
+    "linkedin": "https://www.linkedin.com/in/maxime-dissoubray-35573b1b9/"
+  },
+  {
+    "id": 13,
+    "name": "Gilles Henri",
+    "company": "Clair de baie",
+    "category": "Menuiserie, portail",
+    "role": "",
+    "photo": "",
+    "bio": "Tél: 06 62 62 23 51 • 8 rue de Madrid, 89470 Monéteau.",
+    "linkedin": "https://www.linkedin.com/in/gilles-henry-4711b2121/"
+  },
+  {
+    "id": 14,
+    "name": "Brice Garlan",
+    "company": "EARL Les Beaux Monts",
+    "category": "Vigneron",
+    "role": "",
+    "photo": "",
+    "bio": "Tél: 06 82 57 54 11 • 1 rue de la Fontaine, 89800 Préhy.",
+    "linkedin": ""
+  },
+  {
+    "id": 15,
+    "name": "Oriana Belloeil",
+    "company": "Solerys",
+    "category": "Consultante en Insertion Professionnelle UES",
+    "role": "",
+    "photo": "",
+    "bio": "Tél: 06 63 47 13 48.",
+    "linkedin": "https://www.linkedin.com/in/auriana-belloeil-idpro/"
+  },
+  {
+    "id": 16,
+    "name": "Julien Pilchen",
+    "company": "AIRTECH PEINTURE",
+    "category": "Peintre Bâtiment",
+    "role": "",
+    "photo": "",
+    "bio": "Tél: 06 42 23 40 15 • rue de la Plaine des Isles, 89000 Auxerre.",
+    "linkedin": "https://www.linkedin.com/in/julien-pilchen-538324233/"
+  },
+  {
+    "id": 17,
+    "name": "Julie Chabrol",
+    "company": "Chateau de Villefargeau",
+    "category": "Hote de luxe",
+    "role": "",
+    "photo": "",
+    "bio": "Tél: 677724544 • Email: contact@chateaudevillefargeau.fr • 1 allée du Château, 89240 Villefargeau.",
+    "linkedin": "https://www.linkedin.com/in/julie-chabrol-29812029/"
+  },
+  {
+    "id": 18,
+    "name": "Robin Soyer",
+    "company": "Jeannin Automobiles",
+    "category": "Ventes / Automobile",
+    "role": "Vendeur",
+    "photo": "",
+    "bio": "Tél: 681669725 • Email: r.soyer@jeannin-automobiles.com • 40 avenue charles de gaulle 89000 Auxerre.",
+    "linkedin": "https://www.linkedin.com/in/robin-soyerwn/"
+  },
+  {
+    "id": 19,
+    "name": "Alexandre Faucheur",
+    "company": "Plan B",
+    "category": "Restauration",
+    "role": "",
+    "photo": "",
+    "bio": "Tél: 06 81 05 97 60.",
+    "linkedin": "https://www.linkedin.com/in/alexandre-faucheur-505a5a396/"
+  }
+]
+[
+  {
     "id": 1,
     "name": "Alice Martin",
     "company": "Martin Conseil",
@@ -190,13 +328,13 @@
     "linkedin": "https://www.linkedin.com/in/alexandre-faucheur-505a5a396/"
   },
   {
-    "id": 20,
-    "name": "Marion Laurin",
-    "company": "Ordim",
-    "category": "Agent Immobilier",
-    "role": "",
+    "name": "Test Temp",
+    "company": "Local",
+    "role": "QA Tester",
+    "category": "Test",
     "photo": "",
-    "bio": "Tél: 06 79 06 10 25.",
-    "linkedin": ""
+    "bio": "Temp member for test",
+    "linkedin": "",
+    "id": 21
   }
 ]
