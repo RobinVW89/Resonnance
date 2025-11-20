@@ -409,12 +409,12 @@ ${motivation}`;
             </a>`;
         }
         if (email) {
-            linksHtml += `<a href="mailto:${email}" class="member-link-email" title="Envoyer un email à ${email}">
+            linksHtml += `<a href="#" class="member-link-email" data-email="${email}" title="${email}">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                     <polyline points="22,6 12,13 2,6"/>
                 </svg>
-                <span>${email}</span>
+                <span>Email</span>
             </a>`;
         }
         if (phone) {
@@ -445,12 +445,21 @@ ${motivation}`;
         if (!membersContainer) return;
         membersContainer.innerHTML = '';
         if (list.length === 0) {
-            membersContainer.innerHTML = '<p class="no-results">Aucun membre correspondant.</p>';
+            membersContainer.innerHTML = '<p class="no-results">Aucun membre trouvé.</p>';
             return;
         }
         const frag = document.createDocumentFragment();
         list.forEach(m => frag.appendChild(createMemberCard(m)));
         membersContainer.appendChild(frag);
+        
+        // Add click handlers for email links to show popup
+        membersContainer.querySelectorAll('.member-link-email').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const email = e.currentTarget.dataset.email;
+                alert(email);
+            });
+        });
     }
 
     function filterMembers() {
