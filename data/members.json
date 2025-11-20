@@ -4,11 +4,17 @@
     "name": "Adrien Bailly",
     "company": "HOME 89 AUXERRE",
     "category": "Conciergerie",
-    "role": "",
-    "photo": "",
+    "role": "LinkedIn",
+    "photo": "https://media.licdn.com/dms/image/v2/D4E03AQEaTeiwdvMkIg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1715159277388?e=2147483647&v=beta&t=-Zf94owuC4_4VuflPLREYgJ7QrXklGSwqBIY8JOJNR8",
     "bio": "Tél: 06 78 87 67 60 • Email: Homepart89@gmail.com • 8 quai de la Marine, 89000 Auxerre",
     "linkedin": "https://www.linkedin.com/in/adrien-bailly-9521a210b/",
-    "website": ""
+    "website": "",
+    "_og": {
+      "fetched_at": "2025-11-20T20:38:30.120Z",
+      "title": "Adrien BAILLY - Bail Partner | LinkedIn",
+      "description": "Rejoins nous · Expérience : Bail Partner · Formation : CFA de l&#39;Yonne Henri Neyer Auxerre · Lieu : Auxerre · 500 relations ou plus sur LinkedIn. Consultez le profil de Adrien BAILLY sur LinkedIn, une communauté professionnelle d’un milliard de membres.",
+      "image": "https://media.licdn.com/dms/image/v2/D4E03AQEaTeiwdvMkIg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1715159277388?e=2147483647&v=beta&t=-Zf94owuC4_4VuflPLREYgJ7QrXklGSwqBIY8JOJNR8"
+    }
   },
   {
     "id": 8,
@@ -116,7 +122,7 @@
     "category": "Hote de luxe",
     "role": "",
     "photo": "",
-    "bio": "Tél: 677724544 • Email: contact@chateaudevillefargeau.fr • 1 allée du Château, 89240 Villefargeau",
+    "bio": "Tél: 06 77 72 45 44 • Email: contact@chateaudevillefargeau.fr • 1 allée du Château, 89240 Villefargeau",
     "linkedin": "https://www.linkedin.com/in/julie-chabrol-29812029/",
     "website": "https://www.chateaudevillefargeau.fr/"
   },
@@ -127,7 +133,7 @@
     "category": "Vendeur de voiture et fiscalité automobiles",
     "role": "",
     "photo": "",
-    "bio": "Tél: 681669725 • Email: r.soyer@jeannin-automobiles.com • 40 avenue charles de gaulle 89000 Auxerre",
+    "bio": "Tél: 06 81 66 97 25 • Email: r.soyer@jeannin-automobiles.com • 40 avenue charles de gaulle 89000 Auxerre",
     "linkedin": "https://www.linkedin.com/in/robin-soyerwn/",
     "website": "https://jeannin-automobiles.com/"
   },
