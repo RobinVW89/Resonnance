@@ -358,8 +358,8 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
         background-color: var(--color-black);
         flex-direction: column;
         align-items: flex-start;
-        padding: 5rem 2rem 2rem;
-        gap: 1.5rem;
+        padding: 4rem 2rem 2rem;
+        gap: 1.2rem;
         transition: right var(--transition-normal);
         box-shadow: var(--shadow-lg);
         overflow-y: auto;
