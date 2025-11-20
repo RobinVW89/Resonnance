@@ -132,14 +132,18 @@ function message(msg, isError=false){ adminMessage.textContent = msg; adminMessa
 function resetForm(){ memberForm.reset(); inputs.memberId.value=''; }
 
 function bindTableActions(){
-  tableBody.querySelectorAll('button').forEach(btn=>{
-    btn.addEventListener('click', (e)=>{
-      const id = btn.dataset.id;
-      const act = btn.dataset.action;
-      if(act==='edit') loadMemberToForm(id);
-      if(act==='delete') deleteMember(id);
-    });
+  // Use event delegation on tbody to handle buttons after re-renders.
+  if(tableBody._delegateAttached) return;
+  tableBody.addEventListener('click', (e)=>{
+    const btn = e.target.closest('button');
+    if(!btn || !tableBody.contains(btn)) return;
+    const id = btn.dataset.id;
+    const act = btn.dataset.action;
+    if(!act) return;
+    if(act==='edit') return loadMemberToForm(id);
+    if(act==='delete') return deleteMember(id);
   });
+  tableBody._delegateAttached = true;
 }
 
 function loadMemberToForm(id){
