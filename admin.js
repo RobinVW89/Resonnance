@@ -163,9 +163,11 @@ function deleteMember(id){
   if(!confirm('Supprimer ce membre ?')) return;
   if(apiMode){
     apiFetch(`/api/members/${id}`, { method: 'DELETE' })
-      .then(r=>r.json())
-      .then(()=>{ members = members.filter(m => String(m.id)!==String(id)); applyFilter(); message('Membre supprimé sur le serveur.'); })
-      .catch(()=>{ message('Erreur suppression serveur, suppression locale effectuée.', true); members = members.filter(m => String(m.id)!==String(id)); applyFilter(); });
+      .then(async r => {
+        if(!r.ok){ const txt = await r.text().catch(()=>null); message('Erreur suppression serveur: ' + (txt || r.statusText), true); return; }
+        members = members.filter(m => String(m.id)!==String(id)); applyFilter(); message('Membre supprimé sur le serveur.');
+      })
+      .catch(err=>{ console.error(err); message('Erreur suppression serveur (network). Suppression locale effectuée.', true); members = members.filter(m => String(m.id)!==String(id)); applyFilter(); });
   } else {
     members = members.filter(m => String(m.id)!==String(id));
     applyFilter();
@@ -225,8 +227,9 @@ async function saveToServer(){
   if(!apiMode){ message('API non disponible. Démarrez le serveur API (npm start).', true); return; }
   try{
     const res = await apiFetch('/api/members/save', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(members) });
+    if(!res.ok){ const txt = await res.text().catch(()=>null); message('Erreur sauvegarde serveur: ' + (txt || res.statusText), true); return; }
     const json = await res.json();
-    if(json && json.success) message('Liste sauvegardée sur serveur.'); else message('Erreur sauvegarde serveur.', true);
+    if(json && json.success) message('Liste sauvegardée sur serveur.'); else message('Erreur sauvegarde serveur: ' + (json && json.error ? json.error : 'unknown'), true);
   }catch(e){ console.error(e); message('Erreur sauvegarde serveur.', true); }
 }
 

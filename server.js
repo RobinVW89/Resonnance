@@ -12,14 +12,18 @@ app.use(cors());
 app.use(express.json({ limit: '1mb' }));
 
 // Simple HTTP Basic Auth / token middleware for /api routes
-// Default credentials (override with env vars in production)
-const AUTH_USER = process.env.ADMIN_USER || process.env.API_USER || 'soyer';
-const AUTH_PASS = process.env.ADMIN_PASS || process.env.API_PASS || 'Touran8life@';
-// A simple API token derived from the credentials (base64 of user:pass). You can also set API_TOKEN env var.
-const API_TOKEN = process.env.API_TOKEN || Buffer.from(`${AUTH_USER}:${AUTH_PASS}`).toString('base64');
+// Credentials must be provided via environment variables in production.
+const AUTH_USER = process.env.ADMIN_USER || process.env.API_USER || null;
+const AUTH_PASS = process.env.ADMIN_PASS || process.env.API_PASS || null;
+// A simple API token can be provided directly or derived from USER:PASS (if both set)
+const API_TOKEN = process.env.API_TOKEN || (AUTH_USER && AUTH_PASS ? Buffer.from(`${AUTH_USER}:${AUTH_PASS}`).toString('base64') : null);
 function basicAuth(req, res, next){
   const auth = req.headers.authorization || '';
   const apiKey = req.headers['x-api-key'] || '';
+  // If no credentials configured on the server, refuse requests explicitly
+  if(!API_TOKEN && !(AUTH_USER && AUTH_PASS)){
+    return res.status(503).json({ error: 'Server auth not configured. Set ADMIN_USER/ADMIN_PASS or API_TOKEN.' });
+  }
   // Accept: Basic <base64(user:pass)> OR Bearer <token> OR x-api-key: <token>
   if(auth.startsWith('Basic ')){
     try{
