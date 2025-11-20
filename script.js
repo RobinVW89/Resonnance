@@ -299,6 +299,121 @@ document.addEventListener('DOMContentLoaded', function() {
     // ========== Log for debugging ==========
     console.log('Résonnance website initialized successfully');
     console.log('All interactive features are active');
+
+    // ========== Membres: chargement depuis JSON et filtrage ==========
+    let members = [];
+
+    const membersContainer = document.getElementById('membersContainer');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const memberSearch = document.getElementById('memberSearch');
+
+    function getCategories(list) {
+        const set = new Set(list.map(m => m.category));
+        return Array.from(set).sort();
+    }
+
+    function populateCategoryFilter() {
+        if (!categoryFilter) return;
+        const cats = getCategories(members);
+        cats.forEach(cat => {
+            const opt = document.createElement('option');
+            opt.value = cat;
+            opt.textContent = cat;
+            categoryFilter.appendChild(opt);
+        });
+    }
+
+    function createMemberCard(member) {
+        const card = document.createElement('article');
+        card.className = 'member-card';
+
+        // Photo or placeholder with initials
+        const photoHtml = (member.photo && member.photo.length > 0)
+            ? `<div class="member-photo"><img src="${member.photo}" alt="Photo de ${member.name}" loading="lazy"></div>`
+            : (function(){
+                const initials = (member.name || '').split(' ').map(s=>s[0]).filter(Boolean).slice(0,2).join('').toUpperCase();
+                // derive a simple color based on category or name
+                const seed = (member.category || member.name || '').charCodeAt(0) || 65;
+                const colors = ['#74c69d','#ffd166','#52b788','#90e0ef','#f6bd60','#a0c4ff'];
+                const color = colors[seed % colors.length];
+                return `<div class="member-photo"><div class="placeholder" style="background:${color}">${initials || '?'}</div></div>`;
+            })();
+
+        card.innerHTML = `
+            ${photoHtml}
+            <div class="member-body">
+                <h4 class="member-name">${member.name}</h4>
+                <div class="member-meta">${member.role} ${member.role ? '·' : ''} <span class="member-company">${member.company || ''}</span></div>
+                <div class="member-category">${member.category}</div>
+                <p class="member-bio">${member.bio}</p>
+                ${member.linkedin ? `<div class="member-links"><a href="${member.linkedin}" target="_blank" rel="noopener noreferrer" aria-label="Profil LinkedIn de ${member.name}">LinkedIn</a></div>` : ''}
+            </div>
+        `;
+
+        return card;
+    }
+
+    function renderMembers(list) {
+        if (!membersContainer) return;
+        membersContainer.innerHTML = '';
+        if (list.length === 0) {
+            membersContainer.innerHTML = '<p class="no-results">Aucun membre correspondant.</p>';
+            return;
+        }
+        const frag = document.createDocumentFragment();
+        list.forEach(m => frag.appendChild(createMemberCard(m)));
+        membersContainer.appendChild(frag);
+    }
+
+    function filterMembers() {
+        const category = categoryFilter ? categoryFilter.value : 'all';
+        const query = memberSearch ? memberSearch.value.trim().toLowerCase() : '';
+
+        let filtered = members.slice();
+
+        if (category && category !== 'all') {
+            filtered = filtered.filter(m => m.category === category);
+        }
+
+        if (query) {
+            filtered = filtered.filter(m => {
+                return (m.name && m.name.toLowerCase().includes(query)) ||
+                       (m.company && m.company.toLowerCase().includes(query)) ||
+                       (m.role && m.role.toLowerCase().includes(query)) ||
+                       (m.bio && m.bio.toLowerCase().includes(query));
+            });
+        }
+
+        renderMembers(filtered);
+    }
+
+    function debounce(fn, wait=200){
+        let t;
+        return function(...args){
+            clearTimeout(t);
+            t = setTimeout(()=>fn.apply(this,args), wait);
+        }
+    }
+
+    if (categoryFilter) categoryFilter.addEventListener('change', filterMembers);
+    if (memberSearch) memberSearch.addEventListener('input', debounce(filterMembers, 200));
+
+    // Charge les membres depuis le fichier JSON. Fallback en console en cas d'erreur.
+    fetch('data/members.json')
+        .then(response => {
+            if (!response.ok) throw new Error('Network response was not ok');
+            return response.json();
+        })
+        .then(data => {
+            members = data;
+            populateCategoryFilter();
+            renderMembers(members);
+        })
+        .catch(err => {
+            console.error('Impossible de charger data/members.json:', err);
+            // Si le fetch échoue, on affiche message et laisse la zone vide
+            if (membersContainer) membersContainer.innerHTML = '<p class="no-results">Impossible de charger la liste des membres pour le moment.</p>';
+        });
 });
 
 // ========== External Links ==========

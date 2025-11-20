@@ -25,6 +25,7 @@
                 <li><a href="#accueil" class="nav-link">Accueil</a></li>
                 <li><a href="#vision" class="nav-link">Vision</a></li>
                 <li><a href="#valeurs" class="nav-link">Valeurs</a></li>
+                <li><a href="#membres" class="nav-link">Membres</a></li>
                 <li><a href="#evenements" class="nav-link">Événements</a></li>
                 <li><a href="#avantages" class="nav-link">Avantages</a></li>
                 <li><a href="#adhesion" class="nav-link nav-link-cta">Nous Rejoindre</a></li>
@@ -313,6 +314,34 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Membres Section -->
+    <section id="membres" class="membres-section section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Communauté</span>
+                <h2 class="section-title">Nos Membres</h2>
+                <div class="title-underline"></div>
+            </div>
+
+            <div class="members-controls">
+                <div class="control">
+                    <label for="categoryFilter" class="sr-only">Filtrer par métier</label>
+                    <select id="categoryFilter">
+                        <option value="all">Tous les métiers</option>
+                    </select>
+                </div>
+                <div class="control">
+                    <label for="memberSearch" class="sr-only">Rechercher un membre</label>
+                    <input type="search" id="memberSearch" placeholder="Rechercher par nom, entreprise ou mot-clé...">
+                </div>
+            </div>
+
+            <div id="membersContainer" class="members-grid" aria-live="polite">
+                <!-- Member cards injected by script.js -->
             </div>
         </div>
     </section>

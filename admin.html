@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin Membres — Résonnance</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .admin-container{max-width:1100px;margin:2rem auto;padding:1rem}
+    .admin-header{display:flex;gap:1rem;align-items:center;justify-content:space-between}
+    .admin-actions{display:flex;gap:.5rem;align-items:center}
+    .members-table{width:100%;border-collapse:collapse;margin-top:1rem}
+    .members-table th,.members-table td{border:1px solid #eee;padding:.5rem;text-align:left}
+    .form-inline{display:flex;gap:.5rem;flex-wrap:wrap}
+    .form-inline input,.form-inline select{padding:.4rem .6rem;border:1px solid #ddd;border-radius:4px}
+    .small-btn{padding:.35rem .6rem;font-size:.9rem}
+    .notice{padding:.6rem;border-radius:6px;background:#f6f9f6;border:1px solid #e8f3ea;color:#2b6b3a}
+    .danger{background:#fff4f4;border:1px solid #f2dede;color:#8a1f1f}
+  </style>
+</head>
+<body>
+  <div class="container admin-container">
+    <div class="admin-header">
+      <h1>Admin — Membres</h1>
+      <div class="admin-actions">
+        <input id="fileInput" type="file" accept="text/csv" style="display:none">
+        <button id="importCsvBtn" class="btn small-btn">Importer CSV</button>
+        <input id="apiUser" placeholder="API user" style="width:110px;padding:.35rem .5rem"> 
+        <input id="apiPass" placeholder="API pass" type="password" style="width:110px;padding:.35rem .5rem">
+        <button id="saveApiCredsBtn" class="btn small-btn">Enregistrer credentials</button>
+        <button id="genTokenBtn" class="btn small-btn">Générer token</button>
+        <input id="apiToken" placeholder="Token (base64)" style="width:260px;padding:.35rem .5rem">
+        <button id="downloadJsonBtn" class="btn small-btn">Télécharger JSON</button>
+        <button id="downloadCsvBtn" class="btn small-btn">Télécharger CSV</button>
+        <button id="saveServerBtn" class="btn small-btn">Sauvegarder sur serveur</button>
+        <button id="enrichBtn" class="btn small-btn">Enrichir LinkedIn</button>
+        <a href="/" class="btn small-btn">Retour site</a>
+      </div>
+    </div>
+
+    <p class="notice">La page admin fonctionne côté client : les modifications sont appliquées en mémoire et vous pouvez télécharger le JSON/CSV résultant. Pour persistance côté serveur, il faut une API.</p>
+
+    <section aria-labelledby="addMemberTitle">
+      <h2 id="addMemberTitle">Ajouter / Modifier un membre</h2>
+      <form id="memberForm" class="form-inline" autocomplete="off">
+        <input type="hidden" id="memberId">
+        <input id="name" placeholder="Nom" required>
+        <input id="company" placeholder="Entreprise">
+        <input id="role" placeholder="Fonction">
+        <input id="category" placeholder="Catégorie (ex: Finance)">
+        <input id="photo" placeholder="URL photo">
+        <input id="linkedin" placeholder="URL LinkedIn">
+        <input id="bio" placeholder="Bio" style="min-width:240px">
+        <button id="saveMember" class="btn btn-primary small-btn" type="submit">Enregistrer</button>
+        <button id="resetForm" type="button" class="btn small-btn">Réinitialiser</button>
+      </form>
+    </section>
+
+    <section aria-labelledby="listTitle">
+      <h2 id="listTitle" style="margin-top:1.25rem">Liste des membres</h2>
+      <div style="margin-top:.5rem">
+        <label>Recherche: <input id="adminSearch" placeholder="nom, entreprise, catégorie..."></label>
+      </div>
+      <table class="members-table" id="adminTable" aria-live="polite">
+        <thead>
+          <tr><th>Id</th><th>Nom</th><th>Entreprise</th><th>Role</th><th>Catégorie</th><th>LinkedIn</th><th>Actions</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <p id="adminMessage" style="margin-top:.75rem"></p>
+    </section>
+
+    <section style="margin-top:1.5rem">
+      <h3>Importer CSV — format attendu</h3>
+      <pre>id,name,company,category,role,photo,bio,linkedin
+1,Jean Dupont,Acme,Finance,CEO,https://...,Bio...,https://linkedin.com/...</pre>
+    </section>
+
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>
