@@ -258,6 +258,8 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
     font-weight: 700;
     color: var(--color-white);
     letter-spacing: 0.1em;
+    display: flex;
+    align-items: center;
 }
 
 .logo-image {
@@ -265,10 +267,12 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
     width: auto;
     display: block;
     transition: transform var(--transition-normal);
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
 }
 
 .logo-image:hover {
-    transform: scale(1.05);
+    transform: scale(1.08);
+    filter: drop-shadow(0 4px 12px rgba(106, 156, 137, 0.4));
 }
 
 .logo-text {
