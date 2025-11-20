@@ -358,10 +358,11 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
         background-color: var(--color-black);
         flex-direction: column;
         align-items: flex-start;
-        padding: 6rem 2rem 2rem;
-        gap: 2rem;
+        padding: 5rem 2rem 2rem;
+        gap: 1.5rem;
         transition: right var(--transition-normal);
         box-shadow: var(--shadow-lg);
+        overflow-y: auto;
     }
     
     .nav-menu.active {
