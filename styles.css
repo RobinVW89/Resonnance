@@ -285,7 +285,7 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
 
 .nav-menu {
     display: flex;
-    gap: 2.5rem;
+    gap: 3rem;
     align-items: center;
 }
 
