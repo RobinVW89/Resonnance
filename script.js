@@ -1,5 +1,5 @@
 // ==========================================
-// RÉSONNANCE - Premium Business Club
+// RÉSONANCE - Premium Business Club
 // Interactive Features
 // ==========================================
 
@@ -306,7 +306,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', debouncedSetActiveNavLink);
     
     // ========== Log for debugging ==========
-    console.log('Résonnance website initialized successfully');
+    console.log('Résonance website initialized successfully');
     console.log('All interactive features are active');
 
     // ========== Membres: chargement depuis JSON et filtrage ==========
