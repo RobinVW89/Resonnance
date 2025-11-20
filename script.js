@@ -130,6 +130,35 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
+            // Construire le corps de l'email
+            const nom = formData.get('nom') || '';
+            const prenom = formData.get('prenom') || '';
+            const email = formData.get('email') || '';
+            const telephone = formData.get('telephone') || '';
+            const entreprise = formData.get('entreprise') || '';
+            const fonction = formData.get('fonction') || '';
+            const secteur = formData.get('secteur') || '';
+            const linkedin = formData.get('linkedin') || '';
+            const motivation = formData.get('motivation') || '';
+            
+            const emailBody = `Nouvelle candidature Résonnance
+            
+Nom: ${nom}
+Prénom: ${prenom}
+Email: ${email}
+Téléphone: ${telephone}
+Entreprise: ${entreprise}
+Fonction: ${fonction}
+Secteur: ${secteur}
+LinkedIn: ${linkedin}
+
+Motivation:
+${motivation}`;
+            
+            // Rediriger vers mailto avec les informations
+            const mailtoLink = `mailto:r.soyer@jeannin-automobiles.com?subject=${encodeURIComponent('Candidature Résonnance - ' + prenom + ' ' + nom)}&body=${encodeURIComponent(emailBody)}`;
+            window.location.href = mailtoLink;
+            
             // Show success message
             adhesionForm.style.display = 'none';
             formSuccess.style.display = 'block';
@@ -380,12 +409,12 @@ document.addEventListener('DOMContentLoaded', function() {
             </a>`;
         }
         if (email) {
-            linksHtml += `<a href="mailto:${email}" class="member-link-email" title="Envoyer un email">
+            linksHtml += `<a href="mailto:${email}" class="member-link-email" title="Envoyer un email à ${email}">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                     <polyline points="22,6 12,13 2,6"/>
                 </svg>
-                <span>Email</span>
+                <span>${email}</span>
             </a>`;
         }
         if (phone) {
