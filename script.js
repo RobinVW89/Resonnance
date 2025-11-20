@@ -347,7 +347,15 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const phone = phoneParts ? phoneParts[1].trim() : '';
         const email = emailParts ? emailParts[1].trim() : '';
-        const address = addressParts && !addressParts.includes('Tél') && !addressParts.includes('Email') ? addressParts : '';
+        
+        // Extract only postal code and city from address (e.g., "89000 Auxerre")
+        let cityInfo = '';
+        if (addressParts && !addressParts.includes('Tél') && !addressParts.includes('Email')) {
+            const postalMatch = addressParts.match(/(\d{5})\s+([A-Z][A-Za-zÀ-ÿ\-\s]+)/i);
+            if (postalMatch) {
+                cityInfo = `${postalMatch[1]} ${postalMatch[2].trim()}`;
+            }
+        }
 
         // Build links section
         let linksHtml = '<div class="member-links">';
@@ -395,7 +403,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <h4 class="member-name">${member.name}</h4>
                 <div class="member-company">${member.company || ''}</div>
                 <div class="member-category">${member.category}</div>
-                ${address ? `<div class="member-address">${address}</div>` : ''}
+                ${cityInfo ? `<div class="member-address">${cityInfo}</div>` : ''}
                 ${linksHtml}
             </div>
         `;
