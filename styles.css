@@ -98,14 +98,15 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
 
 /* ========== Container ========== */
 .container {
-    max-width: 1400px;
+    /* reduced max-width for better visibility on narrow screens */
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1.25rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .container {
-        padding: 0 1.5rem;
+        padding: 0 1rem;
     }
 }
 
@@ -170,6 +171,28 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
     border-radius: 0;
     text-align: center;
 }
+
+/* ========= Admin-specific tweaks ========= */
+.admin-container {
+    /* ensure admin area is compact and centered */
+    max-width: 960px;
+    padding: 1rem;
+}
+.admin-container h1, .admin-container h2 {
+    color: var(--color-black);
+    /* make headings smaller in admin to fit the viewport */
+}
+.admin-container h1 { font-size: 2.25rem; margin-bottom: 0.25rem; }
+.admin-container h2 { font-size: 1.5rem; margin-top: 0.5rem; }
+.admin-header { flex-wrap: wrap; gap: .5rem; }
+.admin-actions { gap: .5rem; align-items: center; }
+.admin-actions input[type="text"], .admin-actions input[type="password"], .admin-actions input[type="search"] {
+    max-width: 240px;
+}
+.admin-actions .btn { padding: .4rem .6rem; font-size: .9rem; }
+
+/* prevent horizontal overflow from large headings or long token input */
+.admin-container { overflow-x: hidden; }
 
 .btn-primary {
     background-color: var(--color-gold);
@@ -394,8 +417,9 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
 }
 .members-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+    /* responsive grid: fit as many columns as possible while keeping a reasonable card size */
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
 }
 .member-card {
     background: var(--color-white);
@@ -441,10 +465,6 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
     font-size: 0.85rem;
 }
 .member-links a:hover { background: var(--color-gold-light); }
-
-@media (max-width: 968px) {
-    .members-grid { grid-template-columns: repeat(2, 1fr); }
-}
 
 @media (max-width: 600px) {
     .members-grid { grid-template-columns: 1fr; }
@@ -1399,5 +1419,81 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
     
     .avantage-number {
         font-size: 2.5rem;
+    }
+}
+
+/* ========== Galerie Section ========== */
+.galerie-section {
+    background: var(--color-off-white);
+}
+
+.galerie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.galerie-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    aspect-ratio: 4/3;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-normal);
+    cursor: pointer;
+}
+
+.galerie-item.galerie-large {
+    grid-column: span 2;
+}
+
+.galerie-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+}
+
+.galerie-item:hover img {
+    transform: scale(1.1);
+}
+
+.galerie-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(27, 67, 50, 0.95), transparent);
+    padding: 2rem 1.5rem 1.5rem;
+    transform: translateY(100%);
+    transition: transform var(--transition-normal);
+}
+
+.galerie-item:hover .galerie-overlay {
+    transform: translateY(0);
+}
+
+.galerie-overlay p {
+    color: var(--color-white);
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .galerie-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+    }
+    
+    .galerie-item.galerie-large {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .galerie-grid {
+        grid-template-columns: 1fr;
     }
 }
