@@ -26,7 +26,6 @@
                 <li><a href="#vision" class="nav-link">Vision</a></li>
                 <li><a href="#valeurs" class="nav-link">Valeurs</a></li>
                 <li><a href="#membres" class="nav-link">Membres</a></li>
-                <li><a href="#evenements" class="nav-link">Événements</a></li>
                 <li><a href="#avantages" class="nav-link">Avantages</a></li>
                 <li><a href="#adhesion" class="nav-link nav-link-cta">Nous Rejoindre</a></li>
             </ul>
@@ -164,88 +163,35 @@
         </div>
     </section>
 
-    <!-- Événements Section -->
-    <section id="evenements" class="evenements-section section-padding">
+    <!-- Membres Section -->
+    <section id="membres" class="membres-section section-padding">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Nos Rencontres</span>
-                <h2 class="section-title">Des Événements d'Exception</h2>
+                <span class="section-tag">Le Cœur de Résonnance</span>
+                <h2 class="section-title">Nos Membres</h2>
                 <div class="title-underline"></div>
             </div>
             <p class="section-intro">
-                Résonnance organise régulièrement des événements premium conçus pour favoriser 
-                les échanges de qualité, créer des opportunités business et renforcer les liens 
-                entre membres dans un cadre d'exception.
+                La force de Résonnance réside dans la qualité et la diversité de ses membres. 
+                Découvrez les entrepreneurs, dirigeants et experts qui composent notre communauté 
+                et qui font vivre l'esprit du club au quotidien.
             </p>
-            <div class="evenements-grid">
-                <div class="evenement-card">
-                    <div class="evenement-image">
-                        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop" alt="Dîners Networking" loading="lazy">
-                        <div class="evenement-overlay">
-                            <span class="evenement-tag">Mensuel</span>
-                        </div>
-                    </div>
-                    <div class="evenement-content">
-                        <h3>Dîners Networking Premium</h3>
-                        <p>Des soirées exclusives dans des lieux d'exception pour cultiver des relations professionnelles de qualité autour d'une table raffinée.</p>
-                        <ul class="evenement-details">
-                            <li>Effectif limité à 20-25 membres</li>
-                            <li>Restaurants gastronomiques</li>
-                            <li>Thématiques business ciblées</li>
-                        </ul>
-                    </div>
+
+            <div class="members-controls">
+                <div class="control">
+                    <label for="categoryFilter" class="sr-only">Filtrer par métier</label>
+                    <select id="categoryFilter">
+                        <option value="all">Tous les métiers</option>
+                    </select>
                 </div>
-                <div class="evenement-card">
-                    <div class="evenement-image">
-                        <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&h=600&fit=crop" alt="Conférences" loading="lazy">
-                        <div class="evenement-overlay">
-                            <span class="evenement-tag">Trimestriel</span>
-                        </div>
-                    </div>
-                    <div class="evenement-content">
-                        <h3>Conférences & Masterclass</h3>
-                        <p>Interventions d'experts reconnus, leaders d'opinion et entrepreneurs à succès sur des sujets stratégiques pour votre développement.</p>
-                        <ul class="evenement-details">
-                            <li>Intervenants de renommée internationale</li>
-                            <li>Sessions Q&A privées</li>
-                            <li>Networking avant et après l'événement</li>
-                        </ul>
-                    </div>
+                <div class="control">
+                    <label for="memberSearch" class="sr-only">Rechercher un membre</label>
+                    <input type="search" id="memberSearch" placeholder="Rechercher par nom, entreprise ou mot-clé...">
                 </div>
-                <div class="evenement-card">
-                    <div class="evenement-image">
-                        <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&h=600&fit=crop" alt="Séminaires" loading="lazy">
-                        <div class="evenement-overlay">
-                            <span class="evenement-tag">Semestriel</span>
-                        </div>
-                    </div>
-                    <div class="evenement-content">
-                        <h3>Séminaires Résidentiels</h3>
-                        <p>Expériences immersives dans des lieux d'exception pour approfondir les relations, co-créer des projets et se ressourcer.</p>
-                        <ul class="evenement-details">
-                            <li>2-3 jours en immersion totale</li>
-                            <li>Lieux prestigieux (châteaux, resorts)</li>
-                            <li>Ateliers collaboratifs et stratégiques</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="evenement-card">
-                    <div class="evenement-image">
-                        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&h=600&fit=crop" alt="Speed Business" loading="lazy">
-                        <div class="evenement-overlay">
-                            <span class="evenement-tag">Bimestriel</span>
-                        </div>
-                    </div>
-                    <div class="evenement-content">
-                        <h3>Speed Business Meeting</h3>
-                        <p>Rencontres courtes et efficaces pour multiplier les connexions, explorer des synergies et identifier rapidement des opportunités.</p>
-                        <ul class="evenement-details">
-                            <li>Format optimisé (10 min par rencontre)</li>
-                            <li>Matching ciblé selon les besoins</li>
-                            <li>Suivi personnalisé post-événement</li>
-                        </ul>
-                    </div>
-                </div>
+            </div>
+
+            <div id="membersContainer" class="members-grid" aria-live="polite">
+                <!-- Member cards injected by script.js -->
             </div>
         </div>
     </section>
@@ -314,34 +260,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Membres Section -->
-    <section id="membres" class="membres-section section-padding">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Communauté</span>
-                <h2 class="section-title">Nos Membres</h2>
-                <div class="title-underline"></div>
-            </div>
-
-            <div class="members-controls">
-                <div class="control">
-                    <label for="categoryFilter" class="sr-only">Filtrer par métier</label>
-                    <select id="categoryFilter">
-                        <option value="all">Tous les métiers</option>
-                    </select>
-                </div>
-                <div class="control">
-                    <label for="memberSearch" class="sr-only">Rechercher un membre</label>
-                    <input type="search" id="memberSearch" placeholder="Rechercher par nom, entreprise ou mot-clé...">
-                </div>
-            </div>
-
-            <div id="membersContainer" class="members-grid" aria-live="polite">
-                <!-- Member cards injected by script.js -->
             </div>
         </div>
     </section>
