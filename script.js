@@ -360,11 +360,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         const email = emailParts ? emailParts[1].trim() : '';
         
-        // Extract only postal code and city from bio (e.g., "89000 Auxerre")
-        let cityInfo = '';
-        const postalMatch = bio.match(/(\d{5})\s+([A-ZÉÈÊËÀÂÄÔÖÙÛÜÏÎÇ][A-Za-zÀ-ÿ\-\s]+)/);
+        // Extract only postal code from bio
+        let postalCode = '';
+        const postalMatch = bio.match(/(\d{5})/);
         if (postalMatch) {
-            cityInfo = `${postalMatch[1]} ${postalMatch[2].trim().split(/[\n,]/)[0].trim()}`;
+            postalCode = postalMatch[1];
         }
 
         // Extract description (text after last •)
@@ -434,7 +434,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <h4 class="member-name">${member.name}</h4>
                 <div class="member-company">${member.company || ''}</div>
                 ${member.role ? `<div class="member-role">${member.role}</div>` : ''}
-                <div class="member-category">${member.category}</div>
+                <div class="member-category">${member.category}${postalCode ? ` • ${postalCode}` : ''}</div>
                 ${description ? `<div class="member-description">${description}</div>` : ''}
                 ${linksHtml}
             </div>
