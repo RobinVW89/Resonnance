@@ -375,6 +375,10 @@ document.addEventListener('DOMContentLoaded', function() {
             // Remove address patterns (street address, postal code + city)
             description = description.replace(/^\d+\s+[^,]+,?\s*/, ''); // Remove street address at start
             description = description.replace(/\d{5}\s+[A-ZÉÈÊËÀÂÄÔÖÙÛÜÏÎÇ][A-Za-zÀ-ÿ\-\s]+/g, ''); // Remove postal code + city
+            // Remove email patterns (Email: xxx@xxx.xxx)
+            description = description.replace(/Email:\s*[^\s•]+/gi, ''); // Remove email
+            // Remove phone patterns (Tél: xxx)
+            description = description.replace(/Tél:\s*[\d\s]+/gi, ''); // Remove phone
             description = description.trim();
         }
 
