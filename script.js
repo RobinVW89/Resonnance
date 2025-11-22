@@ -361,10 +361,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const email = emailParts ? emailParts[1].trim() : '';
         
         // Extract slogan/tagline (text before first bullet point or "Tél:")
+        // The slogan should not contain "Tél:" prefix
         let slogan = '';
-        const sloganMatch = bio.match(/^([^•]+?)(?:\s*•|\s*Tél:)/);
-        if (sloganMatch) {
-            slogan = sloganMatch[1].trim();
+        const bioBeforePhone = bio.split(/\s*•\s*Tél:|Tél:/)[0].trim();
+        if (bioBeforePhone && !bioBeforePhone.match(/^\d{5}\s/) && bioBeforePhone.length < 100) {
+            // Only use as slogan if it doesn't start with postal code and is reasonably short
+            slogan = bioBeforePhone;
         }
         
         // Extract only postal code and city from bio (e.g., "89000 Auxerre")
