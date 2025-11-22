@@ -367,11 +367,15 @@ document.addEventListener('DOMContentLoaded', function() {
             postalCode = postalMatch[1];
         }
 
-        // Extract description (text after last •)
+        // Extract description (text after last •) but remove address parts
         let description = '';
         const bioSections = bio.split('•');
         if (bioSections.length > 1) {
             description = bioSections[bioSections.length - 1].trim();
+            // Remove address patterns (street address, postal code + city)
+            description = description.replace(/^\d+\s+[^,]+,?\s*/, ''); // Remove street address at start
+            description = description.replace(/\d{5}\s+[A-ZÉÈÊËÀÂÄÔÖÙÛÜÏÎÇ][A-Za-zÀ-ÿ\-\s]+/g, ''); // Remove postal code + city
+            description = description.trim();
         }
 
         // Extract full address for GPS link
