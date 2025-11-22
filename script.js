@@ -435,7 +435,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="member-company">${member.company || ''}</div>
                 ${member.role ? `<div class="member-role">${member.role}</div>` : ''}
                 <div class="member-category">${member.category}</div>
-                ${cityInfo ? `<div class="member-address">${cityInfo}</div>` : ''}
                 ${description ? `<div class="member-description">${description}</div>` : ''}
                 ${linksHtml}
             </div>
