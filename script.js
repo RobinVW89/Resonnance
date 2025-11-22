@@ -367,6 +367,13 @@ document.addEventListener('DOMContentLoaded', function() {
             cityInfo = `${postalMatch[1]} ${postalMatch[2].trim().split(/[\n,]/)[0].trim()}`;
         }
 
+        // Extract description (text after last •)
+        let description = '';
+        const bioSections = bio.split('•');
+        if (bioSections.length > 1) {
+            description = bioSections[bioSections.length - 1].trim();
+        }
+
         // Extract full address for GPS link
         const fullAddressMatch = bio.match(/(\d+\s+[^,]+),\s*(\d{5}\s+[A-ZÉÈÊËÀÂÄÔÖÙÛÜÏÎÇ][A-Za-zÀ-ÿ\-\s]+)/);
         const hasGPSAddress = fullAddressMatch && member.company === "Plan B";
@@ -429,7 +436,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 ${member.role ? `<div class="member-role">${member.role}</div>` : ''}
                 <div class="member-category">${member.category}</div>
                 ${cityInfo ? `<div class="member-address">${cityInfo}</div>` : ''}
-                ${member.bio && member.bio.length > 0 ? `<div class="member-bio">${member.bio}</div>` : ''}
+                ${description ? `<div class="member-description">${description}</div>` : ''}
                 ${linksHtml}
             </div>
         `;
