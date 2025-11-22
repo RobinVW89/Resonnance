@@ -489,14 +489,6 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
     margin-bottom: 0.6rem;
     font-weight: 500;
 }
-.member-slogan {
-    font-size: 0.875rem;
-    color: var(--color-primary);
-    margin-bottom: 0.6rem;
-    font-style: italic;
-    font-weight: 500;
-    line-height: 1.4;
-}
 .member-address {
     font-size: 0.85rem;
     color: var(--color-gray-dark);

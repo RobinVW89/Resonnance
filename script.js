@@ -348,7 +348,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return `<div class="member-photo"><div class="placeholder" style="background:${color}">${initials || '?'}</div></div>`;
             })();
 
-        // Parse bio to extract phone, email, address and slogan
+        // Parse bio to extract phone, email, address
         const bio = member.bio || '';
         const phoneParts = bio.match(/Tél:\s*([\d\s]+)/);
         const emailParts = bio.match(/Email:\s*([^•]+)/);
@@ -359,15 +359,6 @@ document.addEventListener('DOMContentLoaded', function() {
             phone = phone.match(/.{1,2}/g).join(' ');
         }
         const email = emailParts ? emailParts[1].trim() : '';
-        
-        // Extract slogan/tagline (text before first bullet point or "Tél:")
-        // The slogan should not contain "Tél:" prefix
-        let slogan = '';
-        const bioBeforePhone = bio.split(/\s*•\s*Tél:|Tél:/)[0].trim();
-        if (bioBeforePhone && !bioBeforePhone.match(/^\d{5}\s/) && bioBeforePhone.length < 100) {
-            // Only use as slogan if it doesn't start with postal code and is reasonably short
-            slogan = bioBeforePhone;
-        }
         
         // Extract only postal code and city from bio (e.g., "89000 Auxerre")
         let cityInfo = '';
@@ -422,7 +413,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 <h4 class="member-name">${member.name}</h4>
                 <div class="member-company">${member.company || ''}</div>
                 <div class="member-category">${member.category}</div>
-                ${slogan ? `<div class="member-slogan">${slogan}</div>` : ''}
                 ${cityInfo ? `<div class="member-address">${cityInfo}</div>` : ''}
                 ${linksHtml}
             </div>
