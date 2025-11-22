@@ -429,6 +429,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 ${member.role ? `<div class="member-role">${member.role}</div>` : ''}
                 <div class="member-category">${member.category}</div>
                 ${cityInfo ? `<div class="member-address">${cityInfo}</div>` : ''}
+                ${member.bio && member.bio.length > 0 ? `<div class="member-bio">${member.bio}</div>` : ''}
                 ${linksHtml}
             </div>
         `;
