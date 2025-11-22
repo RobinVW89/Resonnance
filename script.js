@@ -412,6 +412,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="member-body">
                 <h4 class="member-name">${member.name}</h4>
                 <div class="member-company">${member.company || ''}</div>
+                ${member.role ? `<div class="member-role">${member.role}</div>` : ''}
                 <div class="member-category">${member.category}</div>
                 ${cityInfo ? `<div class="member-address">${cityInfo}</div>` : ''}
                 ${linksHtml}
