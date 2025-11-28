@@ -438,28 +438,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Eldo badge if available
         let eldoBadgeHtml = '';
-        if (member.eldoBadge) {
-                // Extract Eldo ID from URL (e.g., clair_de_baie_auxerre)
-                const eldoMatch = member.eldoUrl.match(/eldo\.com\/pro\/([^\/\?]+)/);
-                const eldoId = eldoMatch ? eldoMatch[1] : null;
-            
-                if (eldoId) {
-                    eldoBadge = `<div class="eldo-badge">
-                        <iframe src="https://www.eldo.com/iframe/macaron/${eldoId}" 
-                                width="200" 
-                                height="200" 
-                                frameborder="0" 
-                                scrolling="no"
-                                title="Avis Eldo"></iframe>
-                    </div>`;
-                }
-                                <circle cx="12" cy="12" r="10"/>
-                            </svg>
-                            Eldo
-                        </div>
-                    </div>
-                </a>
-            `;
+        if (member.eldoBadge && member.eldoBadge.url) {
+            // Extract Eldo ID from URL (e.g., clair_de_baie_auxerre)
+            const eldoMatch = member.eldoBadge.url.match(/eldo\.com\/pro\/([^\/\?]+)/);
+            const eldoId = eldoMatch ? eldoMatch[1] : null;
+
+            if (eldoId) {
+                eldoBadgeHtml = `<div class="eldo-badge">
+                    <iframe src="https://www.eldo.com/iframe/macaron/${eldoId}"
+                            width="200"
+                            height="200"
+                            frameborder="0"
+                            scrolling="no"
+                            title="Avis Eldo"></iframe>
+                </div>`;
+            }
         }
 
         card.innerHTML = `
