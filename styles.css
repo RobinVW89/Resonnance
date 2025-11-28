@@ -486,10 +486,13 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
     text-align: center;
     min-width: 120px;
     border: 3px solid white;
-    .eldo-badge iframe {
-        border: none;
-        display: block;
 }
+
+.eldo-badge iframe {
+    border: none;
+    display: block;
+}
+
 .eldo-logo svg {
     fill: currentColor;
 }
