@@ -436,29 +436,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         linksHtml += '</div>';
 
-        // Eldo badge if available
-        let eldoBadgeHtml = '';
-        if (member.eldoBadge && member.eldoBadge.url) {
-            // Extract Eldo ID from URL (e.g., clair_de_baie_auxerre)
-            const eldoMatch = member.eldoBadge.url.match(/eldo\.com\/pro\/([^\/\?]+)/);
-            const eldoId = eldoMatch ? eldoMatch[1] : null;
-
-            if (eldoId) {
-                eldoBadgeHtml = `<div class="eldo-badge">
-                    <iframe src="https://www.eldo.com/iframe/macaron/${eldoId}"
-                            width="200"
-                            height="200"
-                            frameborder="0"
-                            scrolling="no"
-                            title="Avis Eldo"></iframe>
-                </div>`;
-            }
-        }
-
         card.innerHTML = `
             ${photoHtml}
             <div class="member-body">
-                ${eldoBadgeHtml}
                 <h4 class="member-name">${member.name}</h4>
                 <div class="member-company">${member.company || ''}</div>
                 ${member.role ? `<div class="member-role">${member.role}</div>` : ''}
