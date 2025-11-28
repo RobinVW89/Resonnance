@@ -439,14 +439,20 @@ document.addEventListener('DOMContentLoaded', function() {
         // Eldo badge if available
         let eldoBadgeHtml = '';
         if (member.eldoBadge) {
-            eldoBadgeHtml = `
-                <a href="${member.eldoBadge.url}" target="_blank" rel="noopener noreferrer" class="eldo-badge" title="Voir les avis Eldo">
-                    <div class="eldo-badge-content">
-                        <div class="eldo-rating">${member.eldoBadge.rating}</div>
-                        <div class="eldo-stars">⭐⭐⭐⭐⭐</div>
-                        <div class="eldo-info">${member.eldoBadge.reviews}</div>
-                        <div class="eldo-logo">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                // Extract Eldo ID from URL (e.g., clair_de_baie_auxerre)
+                const eldoMatch = member.eldoUrl.match(/eldo\.com\/pro\/([^\/\?]+)/);
+                const eldoId = eldoMatch ? eldoMatch[1] : null;
+            
+                if (eldoId) {
+                    eldoBadge = `<div class="eldo-badge">
+                        <iframe src="https://www.eldo.com/iframe/macaron/${eldoId}" 
+                                width="200" 
+                                height="200" 
+                                frameborder="0" 
+                                scrolling="no"
+                                title="Avis Eldo"></iframe>
+                    </div>`;
+                }
                                 <circle cx="12" cy="12" r="10"/>
                             </svg>
                             Eldo
