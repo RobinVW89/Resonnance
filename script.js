@@ -436,9 +436,30 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         linksHtml += '</div>';
 
+        // Eldo badge if available
+        let eldoBadgeHtml = '';
+        if (member.eldoBadge) {
+            eldoBadgeHtml = `
+                <a href="${member.eldoBadge.url}" target="_blank" rel="noopener noreferrer" class="eldo-badge" title="Voir les avis Eldo">
+                    <div class="eldo-badge-content">
+                        <div class="eldo-rating">${member.eldoBadge.rating}</div>
+                        <div class="eldo-stars">⭐⭐⭐⭐⭐</div>
+                        <div class="eldo-info">${member.eldoBadge.reviews}</div>
+                        <div class="eldo-logo">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <circle cx="12" cy="12" r="10"/>
+                            </svg>
+                            Eldo
+                        </div>
+                    </div>
+                </a>
+            `;
+        }
+
         card.innerHTML = `
             ${photoHtml}
             <div class="member-body">
+                ${eldoBadgeHtml}
                 <h4 class="member-name">${member.name}</h4>
                 <div class="member-company">${member.company || ''}</div>
                 ${member.role ? `<div class="member-role">${member.role}</div>` : ''}

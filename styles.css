@@ -473,7 +473,64 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
+    position: relative;
 }
+
+/* Eldo Badge */
+.eldo-badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    text-decoration: none;
+    z-index: 10;
+    transition: transform 0.3s ease;
+}
+.eldo-badge:hover {
+    transform: scale(1.05);
+}
+.eldo-badge-content {
+    background: linear-gradient(135deg, #2d5f5d 0%, #1a3d3b 100%);
+    color: white;
+    padding: 12px 16px;
+    border-radius: 50px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    text-align: center;
+    min-width: 120px;
+    border: 3px solid white;
+}
+.eldo-rating {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 4px;
+}
+.eldo-stars {
+    font-size: 0.9rem;
+    line-height: 1;
+    margin-bottom: 4px;
+}
+.eldo-info {
+    font-size: 0.7rem;
+    opacity: 0.95;
+    margin-bottom: 6px;
+    line-height: 1.2;
+}
+.eldo-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    background: rgba(255,255,255,0.2);
+    padding: 4px 8px;
+    border-radius: 12px;
+    margin-top: 4px;
+}
+.eldo-logo svg {
+    fill: currentColor;
+}
+
 .member-name { 
     margin: 0; 
     font-size: 1.25rem; 
