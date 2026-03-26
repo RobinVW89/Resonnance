@@ -61,17 +61,6 @@
     "website": "https://agences.banquepopulaire.fr/banque-assurance/agences-auxerre-C89024"
   },
   {
-    "id": 12,
-    "name": "Maxime Dissoubray",
-    "company": "MD Cuisine",
-    "category": "Cuisiniste",
-    "role": "",
-    "photo": "",
-    "bio": "Tél: 06 37 06 57 38 • 14 rue des Lilas, 89290 Augy",
-    "linkedin": "https://www.linkedin.com/in/maxime-dissoubray-35573b1b9/",
-    "website": ""
-  },
-  {
     "id": 13,
     "name": "Gilles Henry",
     "company": "Clair de baie",
@@ -92,17 +81,6 @@
     "bio": "Tél: 06 82 57 54 11 • 1 rue de la Fontaine, 89800 Préhy",
     "linkedin": "",
     "website": "https://irancy-chablis-garlan.fr/contact/"
-  },
-  {
-    "id": 15,
-    "name": "Auriana Belloeil",
-    "company": "Solerys",
-    "category": "Formatrice et consultante en insertion professionnelle",
-    "role": "",
-    "photo": "Photos Membres/Oriana.jpeg",
-    "bio": "Tél: 06 63 47 13 48 • Accompagne les évolutions professionnelles avec une ligne directrice forte : éclairer, structurer et révéler le meilleur des parcours pour créer des réussites durables.",
-    "linkedin": "https://www.linkedin.com/in/auriana-belloeil-idpro/",
-    "website": "https://www.solerys.fr/"
   },
   {
     "id": 16,
@@ -147,16 +125,5 @@
     "bio": "Tél: 03 86 51 30 75 • 9 Rue de l'Horloge, 89000 Auxerre",
     "linkedin": "https://www.linkedin.com/in/alexandre-faucheur-505a5a396/",
     "website": "https://www.facebook.com/planbauxerre/"
-  },
-  {
-    "id": 20,
-    "name": "Marion Laurin",
-    "company": "Ordim",
-    "category": "Agent Immobilier",
-    "role": "",
-    "photo": "",
-    "bio": "Tél: 06 79 06 10 25 • Email: marion.laurin@ordim-immo.com",
-    "linkedin": "",
-    "website": "https://www.ordim-immo.com/agence/169868___/ordim-immobilier-auxerre.html"
   }
 ]
