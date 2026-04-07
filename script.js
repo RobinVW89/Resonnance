@@ -177,8 +177,12 @@ document.addEventListener('DOMContentLoaded', function() {
     if (hero) {
         window.addEventListener('scroll', function() {
             const scrolled = window.pageYOffset;
-            const parallaxSpeed = 0.5;
-            hero.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
+            const heroHeight = hero.offsetHeight || window.innerHeight;
+            const fadeDistance = heroHeight * 0.07;
+            const progress = Math.min(scrolled / fadeDistance, 1);
+
+            hero.style.transform = `translateY(${-scrolled * 1.4}px)`;
+            hero.style.opacity = `${Math.max(0, 1 - progress * 1.8)}`;
         });
     }
     

@@ -44,7 +44,7 @@
     "company": "Banque Pop",
     "category": "Directeur",
     "role": "",
-    "photo": "",
+    "photo": "Photos Membres/Ferreira Jean-Philippe.jpeg",
     "bio": "Tél: 06 31 09 45 23",
     "linkedin": "https://www.linkedin.com/in/jean-philippe-ferreira-de-lima-a380ba138/",
     "website": "https://agences.banquepopulaire.fr/banque-assurance/agences-auxerre-C89024"
@@ -125,5 +125,38 @@
     "bio": "Tél: 03 86 51 30 75 • 9 Rue de l'Horloge, 89000 Auxerre",
     "linkedin": "https://www.linkedin.com/in/alexandre-faucheur-505a5a396/",
     "website": "https://www.facebook.com/planbauxerre/"
+  },
+  {
+    "id": 20,
+    "name": "Damien Vaddé",
+    "company": "L'immobilier à votre image",
+    "category": "Agent commercial immobilier",
+    "role": "",
+    "photo": "Photos Membres/Vaddé Damien.jpeg",
+    "bio": "Tél: 06 77 80 84 76 • Email: damien.vadde.immobilier@gmail.com",
+    "linkedin": "en cours de création",
+    "website": "en cours de création"
+  },
+  {
+    "id": 21,
+    "name": "Guilmineau Camille",
+    "company": "Guilmineau Camille",
+    "category": "Directrice artistique et experte en (re)branding",
+    "role": "",
+    "photo": "Photos Membres/Guilmineau Camille.png",
+    "bio": "Tél: 06 13 41 51 76 • Email: guilmineaucamille@gmail.com",
+    "linkedin": "https://www.linkedin.com/company/cameron-studio-nz",
+    "website": "https://calendly.com/guilmineaucamille/30min?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAdGRleARBrWlleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAacYzeKWByT-NhlaumJlL68kmME8DaKo2injUwGTS9yTq3PzOZYLGMczzQZg9Q_aem__in8B5mWPJHVRNF2MVl3qA&utm_id=97760_v0_s00_e0_tv3_a1denni5hkc6yv_tp1&month=2026-04"
+  },
+  {
+    "id": 22,
+    "name": "Duval Justine",
+    "company": "Agrafes Viti 4.0",
+    "category": "Responsable développement commerciale",
+    "role": "",
+    "photo": "Photos Membres/Duval Justine.jpeg",
+    "bio": "Tél: 07 86 43 93 71 • Email: contact@agrates-viti.com",
+    "linkedin": "https://www.linkedin.com/in/justine-duval-8a302b300/",
+    "website": "https://agrafes-viti.fr"
   }
 ]
