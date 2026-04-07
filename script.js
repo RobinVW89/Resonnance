@@ -178,11 +178,11 @@ document.addEventListener('DOMContentLoaded', function() {
         window.addEventListener('scroll', function() {
             const scrolled = window.pageYOffset;
             const heroHeight = hero.offsetHeight || window.innerHeight;
-            const fadeDistance = heroHeight * 0.07;
+            const fadeDistance = heroHeight * 0.14;
             const progress = Math.min(scrolled / fadeDistance, 1);
 
-            hero.style.transform = `translateY(${-scrolled * 1.4}px)`;
-            hero.style.opacity = `${Math.max(0, 1 - progress * 1.8)}`;
+            hero.style.transform = `translateY(${-scrolled * 0.9}px)`;
+            hero.style.opacity = `${Math.max(0, 1 - progress * 1.2)}`;
         });
     }
     
