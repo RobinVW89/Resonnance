@@ -2,11 +2,11 @@
   {
     "id": 7,
     "name": "Adrien Bailly",
-    "company": "HOME 89 AUXERRE",
+    "company": "Bail partner",
     "category": "Conciergerie",
     "role": "LinkedIn",
     "photo": "https://media.licdn.com/dms/image/v2/D4E03AQEaTeiwdvMkIg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1715159277388?e=2147483647&v=beta&t=-Zf94owuC4_4VuflPLREYgJ7QrXklGSwqBIY8JOJNR8",
-    "bio": "Tél: 06 78 87 67 60 • Email: Homepart89@gmail.com • 8 quai de la Marine, 89000 Auxerre",
+    "bio": "Tél: 06 78 87 67 60 • Email: info@sejouraauxerre.com • 8 quai de la Marine, 89000 Auxerre",
     "linkedin": "https://www.linkedin.com/in/adrien-bailly-9521a210b/",
     "website": "",
     "_og": {
@@ -47,17 +47,6 @@
     "photo": "Photos Membres/Ferreira Jean-Philippe.jpeg",
     "bio": "Tél: 06 31 09 45 23",
     "linkedin": "https://www.linkedin.com/in/jean-philippe-ferreira-de-lima-a380ba138/",
-    "website": "https://agences.banquepopulaire.fr/banque-assurance/agences-auxerre-C89024"
-  },
-  {
-    "id": 11,
-    "name": "Julie hrabar",
-    "company": "Banque Pop",
-    "category": "",
-    "role": "",
-    "photo": "",
-    "bio": "Tél: 06 64 52 69 50 • Email: julie.hrabar@bpbfc.fr",
-    "linkedin": "https://www.linkedin.com/in/julie-hrabar-martiré-b97748164/",
     "website": "https://agences.banquepopulaire.fr/banque-assurance/agences-auxerre-C89024"
   },
   {
@@ -158,5 +147,16 @@
     "bio": "Tél: 07 86 43 93 71 • Email: contact@agrates-viti.com",
     "linkedin": "https://www.linkedin.com/in/justine-duval-8a302b300/",
     "website": "https://agrafes-viti.fr"
+  },
+  {
+    "id": 23,
+    "name": "David Henriques",
+    "company": "HD renovation",
+    "category": "Maçon",
+    "role": "",
+    "photo": "Photos Membres/Henriques David.png",
+    "bio": "Tél: 06 10 56 75 54",
+    "linkedin": "",
+    "website": "https://www.facebook.com/HDRenovation89/"
   }
 ]

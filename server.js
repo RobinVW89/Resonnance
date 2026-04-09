@@ -11,6 +11,9 @@ const app = express();
 app.use(cors());
 app.use(express.json({ limit: '1mb' }));
 
+// Serve the static website files (index.html, assets, etc.)
+app.use(express.static(__dirname));
+
 // Simple HTTP Basic Auth / token middleware for /api routes
 // Credentials must be provided via environment variables in production.
 const AUTH_USER = process.env.ADMIN_USER || process.env.API_USER || null;
